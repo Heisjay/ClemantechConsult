@@ -121,7 +121,7 @@ label.chip{display:inline-block}
   <div class="wrap hg"><div class="hl">
     <h1>Every craft. One team you can call.</h1>
     <p class="lead">Design, video, content, websites, data, projects and events, all handled by real experts. Pick one and message them on WhatsApp in seconds.</p>
-    <div class="cta"><a class="b p" href="#experts">Find an expert</a><button class="b" onclick="openForm('reg')">Join our team</button></div>
+    <div class="cta"><a class="b p" href="#experts">Find an expert</a><button class="b" id="hjoin" onclick="openForm('reg')">Join our team</button></div>
     <div class="stats"><div><b id="n1">0</b>experts online</div><div><b id="n2">0</b>services</div><div><b>1 tap</b>to reach them</div></div>
   </div>
   <aside class="hp" id="hp" aria-label="Explore our services"><div class="pills" id="hpills"></div><div id="hpan" aria-live="polite"></div></aside>
@@ -171,7 +171,7 @@ const DEF=[['🎨','Graphic Design','Logos, branding, flyers and social visuals'
 let S=[]; // live list of expertise areas, loaded from Firestore (config/skills), falls back to DEF
 const $=s=>document.querySelector(s);
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-let U=[],me=null,F='All',Q='',LOGO='',SHOWN=true,dirty=1,hi=0,hStop=0,hHold=0;
+let U=[],me=null,F='All',Q='',LOGO='',SHOWN=true,JOIN=true,dirty=1,hi=0,hStop=0,hHold=0;
 const RM=matchMedia('(prefers-reduced-motion:reduce)').matches;
 function count(el,v){const from=+el.textContent||0;if(from===v||RM){el.textContent=v;return}const t0=performance.now();(function f(t){const k=Math.min(1,(t-t0)/700);el.textContent=Math.round(from+(v-from)*k);if(k<1)requestAnimationFrame(f)})(t0)}
 const cur=()=>U.find(u=>u.id===me);
@@ -186,16 +186,17 @@ document.addEventListener('keydown',e=>e.key==='Escape'&&closeM());
 /* ===== Drawing the page ===== */
 function draw(){
   const a=cur();
-  $('#auth').innerHTML=a?`<button class="b s p" onclick="openDash()">${a.role==='admin'?'Admin panel':'My account'}</button> <button class="b s" onclick="logout()">Log out</button>`:`<button class="b s" onclick="openLogin()">Log in</button> <button class="b s p" onclick="openForm('reg')">Join</button>`;
+  $('#auth').innerHTML=a?`<button class="b s p" onclick="openDash()">${a.role==='admin'?'Admin panel':'My account'}</button> <button class="b s" onclick="logout()">Log out</button>`:`<button class="b s" onclick="openLogin()">Log in</button>${JOIN?` <button class="b s p" onclick="openForm('reg')">Join</button>`:''}`;
   $('#tick').innerHTML=[...S,...S].map(s=>`<span>${s[0]} ${s[1]}</span>`).join('');
   $('#svc').innerHTML=S.length?S.map((s,i)=>`<button class="card svc" style="background:var(${esc(s[3])});color:${s[3]==='--blue'?'#fff':'inherit'}" onclick="pickI(${i})"><div class="ic">${esc(s[0])}</div><h3>${esc(s[1])}</h3><small>${esc(s[2])}</small></button>`).join(''):'<div class="empty"><h3>Services coming soon</h3></div>';
   $('#chips').innerHTML=['All',...S.map(s=>s[1])].map((n,i)=>`<button class="chip ${n===F?'on':''}" onclick="pickI(${i-1},1)">${esc(n)}</button>`).join('');
   const all=U.filter(u=>u.active!==false&&vsk(u).length);
   count($('#n1'),all.length);count($('#n2'),S.length);
   if(dirty){dirty=0;const t=!LOGO||SHOWN;$('#lg').innerHTML=(LOGO?`<img class="lg" src="${LOGO}" alt="${t?'':'CLEMANTECH'}">`:'<i></i>')+(t?'CLEMANTECH':'');$('#flg').innerHTML=(LOGO?`<img class="lg" src="${LOGO}" alt="${t?'':'CLEMANTECH CONSULT'}">`:'')+(t?'CLEMANTECH CONSULT':'');$('#fav').href=LOGO||'data:,'}
+  $('#hjoin').style.display=JOIN?'':'none';
   drawHero();
   const q=Q.toLowerCase(),L=all.filter(u=>(F==='All'||u.skills.includes(F))&&(!q||(u.name+vsk(u).join(' ')+(u.bio||'')).toLowerCase().includes(q)));
-  $('#exp').innerHTML=L.length?L.map(u=>`<article class="card ex"><div class="av" style="--h:${hue(u.name)}">${esc(u.name[0].toUpperCase())}</div><h3>${esc(u.name)}</h3><div class="tags">${vsk(u).map(s=>`<span>${esc(s)}</span>`).join('')}</div><p>${esc(u.bio||'')}</p><div class="acts"><a class="b s wa" href="https://wa.me/${wa(u.whatsapp)}" target="_blank" rel="noopener">WhatsApp</a><a class="b s" href="tel:${tel(u.phone)}">Call</a><a class="b s" href="mailto:${esc(u.email)}">Email</a></div></article>`).join(''):`<div class="empty"><h3>${all.length?'No one matches that yet':'Our experts are joining soon'}</h3><p class="m" style="margin:8px 0 14px">${all.length?'Try another service or clear the search.':'Be the first to list your skills.'}</p><button class="b p" onclick="${all.length?"pick('All',1);setQ('');document.getElementById('q').value=''":"openForm('reg')"}">${all.length?'Show everyone':'Join as an expert'}</button></div>`;
+  $('#exp').innerHTML=L.length?L.map(u=>`<article class="card ex"><div class="av" style="--h:${hue(u.name)}">${esc(u.name[0].toUpperCase())}</div><h3>${esc(u.name)}</h3><div class="tags">${vsk(u).map(s=>`<span>${esc(s)}</span>`).join('')}</div><p>${esc(u.bio||'')}</p><div class="acts"><a class="b s wa" href="https://wa.me/${wa(u.whatsapp)}" target="_blank" rel="noopener">WhatsApp</a><a class="b s" href="tel:${tel(u.phone)}">Call</a><a class="b s" href="mailto:${esc(u.email)}">Email</a></div></article>`).join(''):`<div class="empty"><h3>${all.length?'No one matches that yet':'Our experts are joining soon'}</h3><p class="m" style="margin:8px 0 14px">${all.length?'Try another service or clear the search.':JOIN?'Be the first to list your skills.':'Check back soon.'}</p>${all.length||JOIN?`<button class="b p" onclick="${all.length?"pick('All',1);setQ('');document.getElementById('q').value=''":"openForm('reg')"}">${all.length?'Show everyone':'Join as an expert'}</button>`:''}</div>`;
 }
 /* ===== Interactive hero ===== */
 function drawHero(){
@@ -205,7 +206,7 @@ function drawHero(){
 function hPanel(){
   const s=S[hi];if(!s){$('#hpan').innerHTML='';return}
   const ex=U.filter(u=>u.active!==false&&vsk(u).includes(s[1])),n=ex.length;
-  $('#hpan').innerHTML=`<div class="pan" style="background:var(${esc(s[3])});color:${s[3]==='--blue'?'#fff':'var(--ink)'}"><div class="ic">${esc(s[0])}</div><h3>${esc(s[1])}</h3><p>${esc(s[2])}</p>${n?`<div class="hav">${ex.slice(0,4).map(u=>`<span style="--h:${hue(u.name)}">${esc(u.name[0].toUpperCase())}</span>`).join('')}${n>4?`<span class="more">+${n-4}</span>`:''}</div>`:''}<button class="b p" onclick="${n?`pickI(${hi})`:"openForm('reg')"}">${n?`See ${n} expert${n>1?'s':''} →`:'Be the first to join →'}</button></div>`}
+  $('#hpan').innerHTML=`<div class="pan" style="background:var(${esc(s[3])});color:${s[3]==='--blue'?'#fff':'var(--ink)'}"><div class="ic">${esc(s[0])}</div><h3>${esc(s[1])}</h3><p>${esc(s[2])}</p>${n?`<div class="hav">${ex.slice(0,4).map(u=>`<span style="--h:${hue(u.name)}">${esc(u.name[0].toUpperCase())}</span>`).join('')}${n>4?`<span class="more">+${n-4}</span>`:''}</div>`:''}${n||JOIN?`<button class="b p" onclick="${n?`pickI(${hi})`:"openForm('reg')"}">${n?`See ${n} expert${n>1?'s':''} →`:'Be the first to join →'}</button>`:''}</div>`}
 function hSel(i){hi=i;document.querySelectorAll('#hpills .pill').forEach(b=>b.classList.toggle('on',+b.dataset.i===i));hPanel()}
 $('#hpills').addEventListener('click',e=>{const b=e.target.closest('.pill');if(b){hStop=1;hSel(+b.dataset.i)}});
 $('#hpills').addEventListener('pointerover',e=>{const b=e.target.closest('.pill');if(b&&e.pointerType==='mouse'&&+b.dataset.i!==hi){hStop=1;hSel(+b.dataset.i)}});
@@ -224,12 +225,13 @@ let busy=0,ready=0;
 const er=x=>({'auth/email-already-in-use':'That email is already registered','auth/invalid-credential':'Wrong email or password','auth/weak-password':'Password needs 6+ characters','auth/invalid-email':'That email looks wrong','auth/too-many-requests':'Too many tries. Please wait a moment','permission-denied':'You do not have permission to do that'}[x.code]||'Something went wrong ('+(x.code||x.message)+')');
 onSnapshot(collection(db,'users'),s=>{U=s.docs.map(d=>({...d.data(),id:d.id,skills:d.data().skills||[]}));ready=1;draw()},x=>toast('Could not load experts: '+(x.code||x.message)));
 function vsk(u){return u.skills.filter(k=>S.some(s=>s[1]===k))}
+onSnapshot(doc(db,'config','settings'),s=>{JOIN=!(s.exists()&&s.data().joinOpen===false);draw()},()=>{});
 onSnapshot(doc(db,'config','brand'),s=>{const d=s.exists()?s.data():{};LOGO=d.logo||'';SHOWN=d.showName!==false;dirty=1;draw()},()=>{});
 onSnapshot(doc(db,'config','skills'),s=>{const l=s.exists()&&s.data().list;S=Array.isArray(l)?l.map(x=>[x.i,x.n,x.d,x.c]):DEF;if(F!=='All'&&!S.some(x=>x[1]===F))F='All';draw()},()=>{S=DEF;draw()});
 onAuthStateChanged(au,async u=>{me=u?u.uid:null;if(u&&!busy){const d=await getDoc(doc(db,'users',u.uid)).catch(()=>null);if(d&&!d.exists()){await signOut(au);me=null;toast('This account was removed. Please contact the admin.')}}draw()});
 function acct(){me?openDash():openLogin()}
 function setQ(v){Q=v;draw()}
-function openLogin(){modal(`<h2>Welcome back</h2><form onsubmit="return login(event)"><label>Email<input name="email" type="email" required autocomplete="username"></label><label>Password<input name="pw" type="password" required autocomplete="current-password"></label><button class="b p">Log in</button></form><p class="m" style="margin-top:14px"><a href="#" onclick="forgot();return false">Forgot your password?</a> &nbsp;|&nbsp; <a href="#" onclick="openForm('reg');return false">Create an account</a></p>`)}
+function openLogin(){modal(`<h2>Welcome back</h2><form onsubmit="return login(event)"><label>Email<input name="email" type="email" required autocomplete="username"></label><label>Password<input name="pw" type="password" required autocomplete="current-password"></label><button class="b p">Log in</button></form><p class="m" style="margin-top:14px"><a href="#" onclick="forgot();return false">Forgot your password?</a>${JOIN?` &nbsp;|&nbsp; <a href="#" onclick="openForm('reg');return false">Create an account</a>`:''}</p>`)}
 async function login(e){e.preventDefault();const f=new FormData(e.target);try{await signInWithEmailAndPassword(au,f.get('email').trim(),f.get('pw'));closeM();toast('Welcome back!')}catch(x){toast(er(x))}return false}
 function logout(){signOut(au);toast('Logged out')}
 function forgot(){const ad=U.find(u=>u.role==='admin'&&u.whatsapp);modal(`<h2>Reset your password</h2><p style="margin:12px 0">Enter your email and we will send you a reset link.</p><form onsubmit="return sendReset(event)"><label>Email<input name="email" type="email" required></label><button class="b p">Send reset link</button></form>${ad?`<p class="m" style="margin-top:14px">No access to that email? <a href="https://wa.me/${wa(ad.whatsapp)}" target="_blank" rel="noopener">Message the admin</a></p>`:''}`)}
@@ -237,6 +239,7 @@ async function sendReset(e){e.preventDefault();try{await sendPasswordResetEmail(
 
 /* ===== Forms: register / add / edit / my profile ===== */
 function openForm(mode,id){
+  if(mode==='reg'&&!JOIN)return toast('New sign-ups are closed right now. Please check back later.');
   const u=(id?U.find(x=>x.id===id):mode==='me'?cur():null)||{skills:[]},a=cur()?.role==='admin';
   const T={reg:'Join as an expert',add:'Add an account',edit:'Edit account',me:'My profile'}[mode];
   modal(`<h2>${T}</h2><form onsubmit="return save(event,'${mode}','${u.id||''}')">
@@ -263,10 +266,14 @@ async function save(e,mode,id){e.preventDefault();const f=new FormData(e.target)
 /* ===== Dashboard & admin tools ===== */
 function openDash(){const a=cur();if(!a)return openLogin();
   let h=`<h2>Hi, ${esc(a.name.split(' ')[0])} 👋</h2><div class="acts" style="margin-top:14px"><button class="b p" onclick="openForm('me')">Edit my profile & expertise</button><button class="b" onclick="resetPw('${a.id}')">Change password</button></div>`;
+  if(a.role==='admin')h+=joinAdmin();
   if(a.role==='admin')h+=logoAdmin();
   if(a.role==='admin')h+=skillAdmin();
   if(a.role==='admin')h+=`<h2 style="font-size:1.4rem;margin-top:26px">Team (${U.length})</h2><div class="acts" style="margin-top:10px"><button class="b s p" onclick="openForm('add')">+ Add account</button></div>`+U.map(u=>`<div class="u"><div><b>${esc(u.name)}</b> ${u.role==='admin'?'🛡️':''}${u.active===false?' (hidden)':''}<small>${esc(u.email)}</small><small>${esc(u.skills.join(', ')||'No expertise yet')}</small></div><div class="acts"><button class="b s" onclick="openForm('edit','${u.id}')">Edit</button><button class="b s" onclick="resetPw('${u.id}')">Send reset email</button>${u.id!==me?`<button class="b s d" onclick="del('${u.id}')">Remove</button>`:''}</div></div>`).join('');
   modal(h)}
+function joinAdmin(){
+  return `<h2 style="font-size:1.4rem;margin-top:26px">Expert sign-ups</h2><div class="u"><div><b>${JOIN?'Open':'Closed'}</b><small>${JOIN?'Anyone can join as an expert from the website.':'The Join buttons are hidden and new sign-ups are blocked.'}</small></div><div class="acts"><button class="b s ${JOIN?'d':'p'}" onclick="setJoin(${!JOIN})">${JOIN?'Turn off sign-ups':'Turn on sign-ups'}</button></div></div>`}
+async function setJoin(v){try{await setDoc(doc(db,'config','settings'),{joinOpen:!!v,updatedAt:serverTimestamp()},{merge:true});toast(v?'Sign-ups are open':'Sign-ups are closed');openDash()}catch(x){toast(er(x))}}
 function logoAdmin(){
   return `<h2 style="font-size:1.4rem;margin-top:26px">Site logo</h2><p class="m" style="margin-top:4px">Shown in the top bar, footer and browser tab. A PNG with a transparent background looks best.</p><div class="u"><div>${LOGO?`<img class="lg" src="${LOGO}" alt="Current logo" style="height:56px;max-width:180px;object-fit:contain">`:'<small>No logo yet. The default mark is showing.</small>'}</div><div class="acts"><label class="b s p" style="cursor:pointer">${LOGO?'Replace logo':'Upload logo'}<input type="file" accept="image/*" hidden onchange="upLogo(this)"></label>${LOGO?'<button class="b s d" onclick="rmLogo()">Remove</button>':''}</div></div>${LOGO?`<label class="chip" style="margin-top:10px"><input type="checkbox" ${SHOWN?'checked':''} onchange="setShowName(this.checked)">Show the name next to the logo</label>`:''}`}
 function shrink(f){return new Promise((ok,no)=>{const u=URL.createObjectURL(f),im=new Image();
@@ -291,7 +298,7 @@ async function delSkill(k){const s=S[k];if(!s)return;const c=U.filter(u=>u.skill
 async function resetPw(id){const u=U.find(x=>x.id===id);try{await sendPasswordResetEmail(au,u.email);toast('Reset link sent to '+u.email)}catch(x){toast(er(x))}}
 async function del(id){const u=U.find(x=>x.id===id);if(u.role==='admin'&&U.filter(x=>x.role==='admin').length<2)return toast('You need at least one admin');
   if(!confirm('Remove '+u.name+' from the site? This cannot be undone.'))return;try{await deleteDoc(doc(db,'users',id));toast('Account removed');openDash()}catch(x){toast(er(x))}}
-Object.assign(window,{acct,setQ,openLogin,login,logout,forgot,sendReset,openForm,save,openDash,resetPw,del,pick,pickI,addSkill,delSkill,upLogo,rmLogo,setShowName,closeM,draw});
+Object.assign(window,{acct,setQ,openLogin,login,logout,forgot,sendReset,openForm,save,openDash,resetPw,del,pick,pickI,setJoin,addSkill,delSkill,upLogo,rmLogo,setShowName,closeM,draw});
 draw();
 </script>
 </body>
