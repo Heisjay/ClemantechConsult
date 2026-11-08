@@ -100,10 +100,10 @@ label.chip{display:inline-block}
 <div class="hero">
   <i class="swatch sw1"></i><i class="swatch sw2"></i><i class="swatch sw3"></i>
   <div class="wrap">
-    <h1>Seven crafts. One team you can call.</h1>
+    <h1>Every craft. One team you can call.</h1>
     <p class="lead">Design, video, content, websites, data, projects and events, all handled by real experts. Pick one and message them on WhatsApp in seconds.</p>
     <div class="cta"><a class="b p" href="#experts">Find an expert</a><button class="b" onclick="openForm('reg')">Join our team</button></div>
-    <div class="stats"><div><b id="n1">0</b>experts online</div><div><b>7</b>services</div><div><b>1 tap</b>to reach them</div></div>
+    <div class="stats"><div><b id="n1">0</b>experts online</div><div><b id="n2">0</b>services</div><div><b>1 tap</b>to reach them</div></div>
   </div>
 </div>
 <div class="tick"><div id="tick"></div></div>
@@ -123,7 +123,7 @@ label.chip{display:inline-block}
 <section class="how" id="how"><div class="wrap">
   <h2>How it works</h2>
   <div class="grid" style="margin-top:20px">
-    <div class="card"><h3>1. Choose a service</h3><p>Browse the seven services or search for a skill.</p></div>
+    <div class="card"><h3>1. Choose a service</h3><p>Browse the services or search for a skill.</p></div>
     <div class="card"><h3>2. Pick an expert</h3><p>Every profile shows what they do and how to reach them.</p></div>
     <div class="card"><h3>3. Say hello</h3><p>Message on WhatsApp, call, or send an email, straight from their card.</p></div>
   </div>
@@ -146,7 +146,8 @@ import{getFirestore,collection,doc,onSnapshot,setDoc,updateDoc,deleteDoc,getDoc,
 const FB={apiKey:"AIzaSyD2mYFtPnRS5U3Eh0wQpw3FGRKIh56axlg",authDomain:"clemantech.firebaseapp.com",projectId:"clemantech",storageBucket:"clemantech.firebasestorage.app",messagingSenderId:"42083771386",appId:"1:42083771386:web:597881c3dbd88d242efa43"};
 const app=initializeApp(FB),au=getAuth(app),db=getFirestore(app);
 const CFG={CC:'233'}; // default country code for numbers starting with 0
-const S=[['🎨','Graphic Design','Logos, branding, flyers and social visuals','--pink'],['🎬','Video Editing','Reels, ads, events and documentaries','--sun'],['✍️','Content Creation','Captions, blogs, photos and brand stories','--mint'],['💻','Website Development','Fast, good-looking sites and web apps','--blue'],['📊','Data Analysis','Dashboards, reports and clear insights','--sun'],['🧭','Project Management','Plans, teams and deadlines that hold','--mint'],['🎉','Event Planning & Resin Art','Memorable events and handmade resin pieces','--pink']];
+const DEF=[['🎨','Graphic Design','Logos, branding, flyers and social visuals','--pink'],['🎬','Video Editing','Reels, ads, events and documentaries','--sun'],['✍️','Content Creation','Captions, blogs, photos and brand stories','--mint'],['💻','Website Development','Fast, good-looking sites and web apps','--blue'],['📊','Data Analysis','Dashboards, reports and clear insights','--sun'],['🧭','Project Management','Plans, teams and deadlines that hold','--mint'],['🎉','Event Planning & Resin Art','Memorable events and handmade resin pieces','--pink']];
+let S=[]; // live list of expertise areas, loaded from Firestore (config/skills), falls back to DEF
 const $=s=>document.querySelector(s);
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 let U=[],me=null,F='All',Q='';
@@ -164,19 +165,22 @@ function draw(){
   const a=cur();
   $('#auth').innerHTML=a?`<button class="b s p" onclick="openDash()">${a.role==='admin'?'Admin panel':'My account'}</button> <button class="b s" onclick="logout()">Log out</button>`:`<button class="b s" onclick="openLogin()">Log in</button> <button class="b s p" onclick="openForm('reg')">Join</button>`;
   $('#tick').innerHTML=[...S,...S].map(s=>`<span>${s[0]} ${s[1]}</span>`).join('');
-  $('#svc').innerHTML=S.map(s=>`<button class="card svc" style="background:var(${s[3]});color:${s[3]==='--blue'?'#fff':'inherit'}" onclick="pick('${s[1]}')"><div class="ic">${s[0]}</div><h3>${s[1]}</h3><small>${s[2]}</small></button>`).join('');
-  $('#chips').innerHTML=['All',...S.map(s=>s[1])].map(n=>`<button class="chip ${n===F?'on':''}" onclick="pick('${n}',1)">${n}</button>`).join('');
-  const all=U.filter(u=>u.active!==false&&u.skills.length);
-  $('#n1').textContent=all.length;
-  const q=Q.toLowerCase(),L=all.filter(u=>(F==='All'||u.skills.includes(F))&&(!q||(u.name+u.skills.join(' ')+(u.bio||'')).toLowerCase().includes(q)));
-  $('#exp').innerHTML=L.length?L.map(u=>`<article class="card ex"><div class="av" style="--h:${hue(u.name)}">${esc(u.name[0].toUpperCase())}</div><h3>${esc(u.name)}</h3><div class="tags">${u.skills.map(s=>`<span>${esc(s)}</span>`).join('')}</div><p>${esc(u.bio||'')}</p><div class="acts"><a class="b s wa" href="https://wa.me/${wa(u.whatsapp)}" target="_blank" rel="noopener">WhatsApp</a><a class="b s" href="tel:${tel(u.phone)}">Call</a><a class="b s" href="mailto:${esc(u.email)}">Email</a></div></article>`).join(''):`<div class="empty"><h3>${all.length?'No one matches that yet':'Our experts are joining soon'}</h3><p class="m" style="margin:8px 0 14px">${all.length?'Try another service or clear the search.':'Be the first to list your skills.'}</p><button class="b p" onclick="${all.length?"pick('All',1);setQ('');document.getElementById('q').value=''":"openForm('reg')"}">${all.length?'Show everyone':'Join as an expert'}</button></div>`;
+  $('#svc').innerHTML=S.length?S.map((s,i)=>`<button class="card svc" style="background:var(${esc(s[3])});color:${s[3]==='--blue'?'#fff':'inherit'}" onclick="pickI(${i})"><div class="ic">${esc(s[0])}</div><h3>${esc(s[1])}</h3><small>${esc(s[2])}</small></button>`).join(''):'<div class="empty"><h3>Services coming soon</h3></div>';
+  $('#chips').innerHTML=['All',...S.map(s=>s[1])].map((n,i)=>`<button class="chip ${n===F?'on':''}" onclick="pickI(${i-1},1)">${esc(n)}</button>`).join('');
+  const all=U.filter(u=>u.active!==false&&vsk(u).length);
+  $('#n1').textContent=all.length;$('#n2').textContent=S.length;
+  const q=Q.toLowerCase(),L=all.filter(u=>(F==='All'||u.skills.includes(F))&&(!q||(u.name+vsk(u).join(' ')+(u.bio||'')).toLowerCase().includes(q)));
+  $('#exp').innerHTML=L.length?L.map(u=>`<article class="card ex"><div class="av" style="--h:${hue(u.name)}">${esc(u.name[0].toUpperCase())}</div><h3>${esc(u.name)}</h3><div class="tags">${vsk(u).map(s=>`<span>${esc(s)}</span>`).join('')}</div><p>${esc(u.bio||'')}</p><div class="acts"><a class="b s wa" href="https://wa.me/${wa(u.whatsapp)}" target="_blank" rel="noopener">WhatsApp</a><a class="b s" href="tel:${tel(u.phone)}">Call</a><a class="b s" href="mailto:${esc(u.email)}">Email</a></div></article>`).join(''):`<div class="empty"><h3>${all.length?'No one matches that yet':'Our experts are joining soon'}</h3><p class="m" style="margin:8px 0 14px">${all.length?'Try another service or clear the search.':'Be the first to list your skills.'}</p><button class="b p" onclick="${all.length?"pick('All',1);setQ('');document.getElementById('q').value=''":"openForm('reg')"}">${all.length?'Show everyone':'Join as an expert'}</button></div>`;
 }
 function pick(n,stay){F=n;draw();if(!stay)document.getElementById('experts').scrollIntoView()}
+function pickI(i,stay){pick(i<0?'All':S[i][1],stay)}
 
 /* ===== Live data & auth ===== */
 let busy=0,ready=0;
 const er=x=>({'auth/email-already-in-use':'That email is already registered','auth/invalid-credential':'Wrong email or password','auth/weak-password':'Password needs 6+ characters','auth/invalid-email':'That email looks wrong','auth/too-many-requests':'Too many tries. Please wait a moment','permission-denied':'You do not have permission to do that'}[x.code]||'Something went wrong ('+(x.code||x.message)+')');
 onSnapshot(collection(db,'users'),s=>{U=s.docs.map(d=>({...d.data(),id:d.id,skills:d.data().skills||[]}));ready=1;draw()},x=>toast('Could not load experts: '+(x.code||x.message)));
+const vsk=u=>u.skills.filter(k=>S.some(s=>s[1]===k));
+onSnapshot(doc(db,'config','skills'),s=>{const l=s.exists()&&s.data().list;S=Array.isArray(l)?l.map(x=>[x.i,x.n,x.d,x.c]):DEF;if(F!=='All'&&!S.some(x=>x[1]===F))F='All';draw()},()=>{S=DEF;draw()});
 onAuthStateChanged(au,async u=>{me=u?u.uid:null;if(u&&!busy){const d=await getDoc(doc(db,'users',u.uid)).catch(()=>null);if(d&&!d.exists()){await signOut(au);me=null;toast('This account was removed. Please contact the admin.')}}draw()});
 function acct(){me?openDash():openLogin()}
 function setQ(v){Q=v;draw()}
@@ -214,12 +218,25 @@ async function save(e,mode,id){e.preventDefault();const f=new FormData(e.target)
 /* ===== Dashboard & admin tools ===== */
 function openDash(){const a=cur();if(!a)return openLogin();
   let h=`<h2>Hi, ${esc(a.name.split(' ')[0])} 👋</h2><div class="acts" style="margin-top:14px"><button class="b p" onclick="openForm('me')">Edit my profile & expertise</button><button class="b" onclick="resetPw('${a.id}')">Change password</button></div>`;
+  if(a.role==='admin')h+=skillAdmin();
   if(a.role==='admin')h+=`<h2 style="font-size:1.4rem;margin-top:26px">Team (${U.length})</h2><div class="acts" style="margin-top:10px"><button class="b s p" onclick="openForm('add')">+ Add account</button></div>`+U.map(u=>`<div class="u"><div><b>${esc(u.name)}</b> ${u.role==='admin'?'🛡️':''}${u.active===false?' (hidden)':''}<small>${esc(u.email)}</small><small>${esc(u.skills.join(', ')||'No expertise yet')}</small></div><div class="acts"><button class="b s" onclick="openForm('edit','${u.id}')">Edit</button><button class="b s" onclick="resetPw('${u.id}')">Send reset email</button>${u.id!==me?`<button class="b s d" onclick="del('${u.id}')">Remove</button>`:''}</div></div>`).join('');
   modal(h)}
+function skillAdmin(){
+  const opt=[['--pink','Pink'],['--sun','Yellow'],['--mint','Mint'],['--blue','Blue']].map(o=>`<option value="${o[0]}">${o[1]}</option>`).join('');
+  return `<h2 style="font-size:1.4rem;margin-top:26px">Areas of expertise (${S.length})</h2><p class="m" style="margin-top:4px">These appear as services on the site and as choices when experts set up their profile.</p>`
+  +S.map((s,k)=>{const c=U.filter(u=>u.active!==false&&u.skills.includes(s[1])).length;return `<div class="u"><div><b>${esc(s[0])} ${esc(s[1])}</b><small>${c} expert${c===1?'':'s'}</small></div><div class="acts"><button class="b s d" onclick="delSkill(${k})">Remove</button></div></div>`}).join('')
+  +`<form class="u" style="display:grid" onsubmit="return addSkill(event)"><b>Add an area of expertise</b><div class="row"><label>Emoji<input name="i" maxlength="4" placeholder="✨"></label><label>Name<input name="n" required maxlength="40" placeholder="e.g. Photography"></label></div><label>Short description<input name="d" maxlength="80" placeholder="What this covers"></label><label>Card colour<select name="c">${opt}</select></label><button class="b p">+ Add area</button></form>`}
+async function saveSkills(l){await setDoc(doc(db,'config','skills'),{list:l.map(x=>({i:x[0],n:x[1],d:x[2],c:x[3]})),updatedAt:serverTimestamp()})}
+async function addSkill(e){e.preventDefault();const f=new FormData(e.target),n=(f.get('n')||'').trim(),i=(f.get('i')||'').trim()||'✨',d=(f.get('d')||'').trim()||'Ask our experts for details';
+  if(!n)return false;if(S.some(s=>s[1].toLowerCase()===n.toLowerCase()))return toast('That area already exists'),false;
+  try{await saveSkills([...S,[i,n,d,f.get('c')]]);toast('Added '+n);openDash()}catch(x){toast(er(x))}return false}
+async function delSkill(k){const s=S[k];if(!s)return;const c=U.filter(u=>u.skills.includes(s[1])).length;
+  if(!confirm('Remove "'+s[1]+'"?'+(c?' '+c+' expert'+(c>1?'s':'')+' currently list it. It will disappear from the site and their profiles.':'')))return;
+  try{await saveSkills(S.filter((_,j)=>j!==k));toast('Removed '+s[1]);openDash()}catch(x){toast(er(x))}}
 async function resetPw(id){const u=U.find(x=>x.id===id);try{await sendPasswordResetEmail(au,u.email);toast('Reset link sent to '+u.email)}catch(x){toast(er(x))}}
 async function del(id){const u=U.find(x=>x.id===id);if(u.role==='admin'&&U.filter(x=>x.role==='admin').length<2)return toast('You need at least one admin');
   if(!confirm('Remove '+u.name+' from the site? This cannot be undone.'))return;try{await deleteDoc(doc(db,'users',id));toast('Account removed');openDash()}catch(x){toast(er(x))}}
-Object.assign(window,{acct,setQ,openLogin,login,logout,forgot,sendReset,openForm,save,openDash,resetPw,del,pick,closeM,draw});
+Object.assign(window,{acct,setQ,openLogin,login,logout,forgot,sendReset,openForm,save,openDash,resetPw,del,pick,pickI,addSkill,delSkill,closeM,draw});
 draw();
 </script>
 </body>
