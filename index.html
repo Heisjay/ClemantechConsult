@@ -1,305 +1,129 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>CLEMANTECH CONSULT | Creative & Tech Experts You Can Call</title>
-<meta name="description" content="Graphic design, video editing, content creation, web development, data analysis, project management, event planning and resin art. Contact our experts directly.">
-<meta name="theme-color" content="#2f3bff">
-<link rel="icon" id="fav" href="data:,">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=Figtree:wght@400;600;700&display=swap" rel="stylesheet">
-<style>
-:root{--ink:#161425;--blue:#2f3bff;--sun:#ffd23f;--pink:#ff5d8f;--mint:#7ef0c8;--paper:#f6f5ff;--r:22px}
-*{box-sizing:border-box;margin:0}
-html{scroll-behavior:smooth}
-body{font:400 1rem/1.55 Figtree,system-ui,sans-serif;background:var(--paper);color:var(--ink);padding-bottom:78px}
-h1,h2,h3,.logo{font-family:'Bricolage Grotesque',Figtree,sans-serif;line-height:1.05}
-a{color:inherit}
-:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
-.wrap{max-width:1100px;margin:auto;padding:0 20px}
-.nav{position:sticky;top:0;z-index:20;background:var(--paper);border-bottom:2px solid var(--ink);padding-top:env(safe-area-inset-top)}
-.nav .wrap{display:flex;align-items:center;gap:14px;height:62px}
-.logo{font-weight:800;font-size:1.25rem;text-decoration:none;margin-right:auto;display:flex;gap:8px;align-items:center}
-.logo i{width:26px;height:26px;border-radius:50% 50% 50% 6px;background:var(--pink);border:2px solid var(--ink);display:inline-block}
-.nav a.l{text-decoration:none;font-weight:600;display:none}
-.b{font:700 .95rem Figtree,sans-serif;border:2px solid var(--ink);background:#fff;color:var(--ink);border-radius:999px;padding:10px 18px;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:6px;justify-content:center;transition:transform .15s,box-shadow .15s;box-shadow:3px 3px 0 var(--ink)}
-.b:hover{transform:translate(-1px,-1px);box-shadow:5px 5px 0 var(--ink)}.b:active{transform:translate(2px,2px);box-shadow:0 0 0 var(--ink)}
-.b.p{background:var(--sun)}.b.wa{background:var(--mint)}.b.s{padding:7px 12px;font-size:.85rem;box-shadow:2px 2px 0 var(--ink)}.b.d{background:var(--pink)}
-.hero{background:var(--blue);color:#fff;border-bottom:2px solid var(--ink);position:relative;overflow:hidden}
-.hero .wrap{padding-top:52px;padding-bottom:56px;position:relative;z-index:1}
-.hero h1{font-size:clamp(2.6rem,9vw,5.6rem);font-weight:800;max-width:11em;letter-spacing:-.02em}
-.hero p.lead{font-size:1.15rem;max-width:34em;margin:18px 0 26px;opacity:.95}
-.cta{display:flex;gap:12px;flex-wrap:wrap}
-.swatch{position:absolute;border:2px solid var(--ink);border-radius:50%;animation:fl 7s ease-in-out infinite}
-.sw1{width:160px;height:160px;background:var(--sun);right:-30px;top:30px}
-.sw2{width:90px;height:90px;background:var(--pink);right:150px;top:230px;animation-delay:-2s;border-radius:24px}
-.sw3{width:60px;height:60px;background:var(--mint);right:60px;bottom:30px;animation-delay:-4s}
-@keyframes fl{50%{transform:translateY(-18px) rotate(12deg)}}
-.stats{display:flex;gap:26px;margin-top:34px;flex-wrap:wrap}.stats b{font:800 2rem 'Bricolage Grotesque';display:block}
-.tick{background:var(--ink);color:var(--paper);overflow:hidden;white-space:nowrap;border-bottom:2px solid var(--ink)}
-.tick div{display:inline-block;padding:12px 0;animation:mq 28s linear infinite;font-weight:700}
-.tick span{margin:0 22px}
-@keyframes mq{to{transform:translateX(-50%)}}
-section{padding:60px 0}
-h2{font-size:clamp(1.9rem,5vw,3rem);font-weight:800;margin-bottom:8px}
-.sub{max-width:36em;margin-bottom:26px;opacity:.8}
-.grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fill,minmax(250px,1fr))}
-.card{border:2px solid var(--ink);border-radius:var(--r);background:#fff;padding:20px;box-shadow:5px 5px 0 var(--ink)}
-.svc{cursor:pointer;text-align:left;font:inherit;color:inherit;transition:transform .2s}
-.svc:hover{transform:rotate(-1.2deg) scale(1.02)}
-.svc .ic{font-size:2rem}.svc h3{font-size:1.3rem;margin:10px 0 6px}.svc small{display:block;opacity:.85}
-.chips{display:flex;gap:8px;overflow-x:auto;padding:4px 2px 12px;scrollbar-width:none}
-.chip{border:2px solid var(--ink);background:#fff;border-radius:999px;padding:7px 14px;font-weight:600;cursor:pointer;white-space:nowrap;font-size:.9rem;font-family:inherit;color:var(--ink)}
-.chip.on,.chip:has(input:checked){background:var(--ink);color:#fff}
-.chip input{position:absolute;opacity:0;pointer-events:none}
-.sk{display:flex;flex-wrap:wrap;gap:6px}
-.search{width:100%;max-width:420px;margin-bottom:12px}
-input,select,textarea{font:inherit;border:2px solid var(--ink);border-radius:14px;padding:11px 14px;background:#fff;color:var(--ink);width:100%}
-.ex .av{width:56px;height:56px;border-radius:18px;border:2px solid var(--ink);display:grid;place-items:center;font:800 1.5rem 'Bricolage Grotesque';background:hsl(var(--h) 90% 75%)}
-.ex h3{margin:12px 0 8px;font-size:1.3rem}
-.tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}.tags span{background:var(--paper);border:1.5px solid var(--ink);border-radius:999px;padding:2px 10px;font-size:.8rem;font-weight:600}
-.ex p{font-size:.92rem;margin-bottom:14px}
-.acts{display:flex;gap:8px;flex-wrap:wrap}
-.empty{border:2px dashed var(--ink);border-radius:var(--r);padding:34px 20px;text-align:center;grid-column:1/-1}
-.how{background:var(--sun);border-block:2px solid var(--ink)}
-.how .grid{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
-footer{background:var(--ink);color:var(--paper);padding:36px 0}
-footer .wrap{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between}
-.bn{position:fixed;left:0;right:0;bottom:0;z-index:20;display:flex;background:var(--paper);border-top:2px solid var(--ink);padding-bottom:env(safe-area-inset-bottom)}
-.bn a,.bn button{flex:1;text-align:center;padding:9px 0;font:600 .72rem Figtree;text-decoration:none;background:none;border:0;color:var(--ink);cursor:pointer}
-.bn span{display:block;font-size:1.35rem}
-#ov{position:fixed;inset:0;z-index:50;background:rgba(22,20,37,.6);display:none;align-items:flex-end;justify-content:center}
-#ov.on{display:flex}
-.box{background:var(--paper);border:2px solid var(--ink);border-radius:26px 26px 0 0;width:100%;max-width:560px;max-height:92vh;overflow:auto;padding:24px 22px calc(24px + env(safe-area-inset-bottom));animation:up .25s ease-out}
-@keyframes up{from{transform:translateY(40px);opacity:0}}
-.box h2{font-size:1.8rem}.x{float:right}
-form{display:grid;gap:12px;margin-top:14px}
-label{font-weight:600;font-size:.9rem;display:grid;gap:4px}
-label.chip{display:inline-block}
-.row{display:grid;gap:12px}
-.m{font-size:.85rem;opacity:.75}
-.note{background:var(--sun);border:2px solid var(--ink);border-radius:14px;padding:10px 14px;margin-top:12px;font-weight:600}
-.u{display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap;border:2px solid var(--ink);border-radius:16px;background:#fff;padding:12px;margin-top:10px}
-.u small{display:block;opacity:.75}
-.tmp{font:800 2rem 'Bricolage Grotesque';background:#fff;border:2px dashed var(--ink);border-radius:14px;padding:14px;text-align:center;margin:12px 0;user-select:all}
-#toast{position:fixed;left:50%;bottom:96px;transform:translate(-50%,30px);background:var(--ink);color:#fff;padding:12px 20px;border-radius:999px;opacity:0;transition:.25s;z-index:99;max-width:90vw;text-align:center;pointer-events:none}
-#toast.on{opacity:1;transform:translate(-50%,0)}
-@media(min-width:760px){.nav a.l{display:block}.bn{display:none}body{padding-bottom:0}#ov{align-items:center}.box{border-radius:26px}.row{grid-template-columns:1fr 1fr}#toast{bottom:30px}}
-@media(max-width:700px){.swatch{opacity:.5}}
-@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
-.logo img.lg{height:36px;width:auto;max-width:150px;object-fit:contain;display:block}
-.swatch{transition:translate .25s ease-out}
-.hg{display:grid;gap:34px}
-.hp{position:relative}
-.pills{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
-.pill{border:2px solid var(--ink);background:#fff;color:var(--ink);border-radius:999px;padding:7px 12px;font:600 .85rem Figtree,sans-serif;cursor:pointer;box-shadow:2px 2px 0 var(--ink);transition:transform .15s,box-shadow .15s,background .15s}
-.pill:hover{transform:translate(-1px,-1px);box-shadow:3px 3px 0 var(--ink)}
-.pill.on{background:var(--sun);transform:translate(-2px,-2px);box-shadow:4px 4px 0 var(--ink)}
-.pan{border:2px solid var(--ink);border-radius:var(--r);padding:22px;box-shadow:6px 6px 0 var(--ink);min-height:236px;animation:pin .35s ease-out}
-@keyframes pin{from{transform:translateY(12px) rotate(-1.5deg);opacity:0}}
-.pan .ic{font-size:2.6rem;line-height:1}
-.pan h3{font-size:1.7rem;margin:10px 0 6px}
-.pan p{margin-bottom:14px;max-width:26em}
-.hav{display:flex;align-items:center;margin-bottom:16px}
-.hav span{width:36px;height:36px;border-radius:50%;border:2px solid var(--ink);display:grid;place-items:center;font:800 .95rem 'Bricolage Grotesque',sans-serif;background:hsl(var(--h) 90% 75%);color:var(--ink);margin-left:-8px}
-.hav span:first-child{margin-left:0}
-.hav span.more{background:#fff;font-size:.8rem}
-@media(min-width:900px){.hg{grid-template-columns:1.1fr .9fr;align-items:center}}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#10120f">
+  <meta name="description" content="Clemantech Consult connects you with creative and tech experts for design, video, content, websites, data, projects and events.">
+  <title>Clemantech Consult — One team you can call</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" id="fav" href="data:,">
 </head>
 <body>
-<header class="nav"><div class="wrap">
-  <a class="logo" href="#top" id="lg"><i></i>CLEMANTECH</a>
-  <a class="l" href="#services">Services</a><a class="l" href="#experts">Experts</a><a class="l" href="#how">How it works</a>
-  <span id="auth"></span>
-</div></header>
+  <div class="noise" aria-hidden="true"></div><div class="spot" aria-hidden="true"></div><div class="prog" id="prog"></div>
+  <header class="site-header">
+    <a class="brand" id="lg" href="#home" aria-label="Clemantech home"></a>
+    <button class="menu-toggle" aria-label="Open menu" aria-expanded="false"><span></span><span></span></button>
+    <nav class="nav">
+      <a href="#services">Services</a>
+      <a href="#experts">Experts</a>
+      <a href="#how">How it works</a>
+      <span class="auth" id="auth"></span>
+    </nav>
+  </header>
 
-<main id="top">
-<div class="hero" id="hero">
-  <i class="swatch sw1" data-d="40"></i><i class="swatch sw2" data-d="-60"></i><i class="swatch sw3" data-d="80"></i>
-  <div class="wrap hg"><div class="hl">
-    <h1>Every craft. One team you can call.</h1>
-    <p class="lead">Design, video, content, websites, data, projects and events, all handled by real experts. Pick one and message them on WhatsApp in seconds.</p>
-    <div class="cta"><a class="b p" href="#experts">Find an expert</a><button class="b" id="hjoin" onclick="openForm('reg')">Join our team</button></div>
-    <div class="stats"><div><b id="n1">0</b>experts online</div><div><b id="n2">0</b>services</div><div><b>1 tap</b>to reach them</div></div>
-  </div>
-  <aside class="hp" id="hp" aria-label="Explore our services"><div class="pills" id="hpills"></div><div id="hpan" aria-live="polite"></div></aside>
-  </div>
-</div>
-<div class="tick"><div id="tick"></div></div>
+  <main>
+    <section class="hero section-wrap" id="home">
+      <div class="hero-copy">
+        <div class="eyebrow"><span class="pulse"></span> CREATIVE & TECH EXPERTS, CONNECTED</div>
+        <h1>One team<br>you can <em>call.</em></h1>
+        <p class="hero-lead">Design, video, content, websites, data, projects and events — all handled by real experts. Pick one and message them on WhatsApp in seconds.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#experts">Find an expert <span>↗</span></a>
+          <a class="btn btn-quiet" href="#join" data-join onclick="joinNow();return false">Join our team <span>＋</span></a>
+        </div>
+        <div class="hero-proof">
+          <div class="avatar-stack"><i>✳</i><i>◈</i><i>✦</i><b>+</b></div>
+          <span>Good people. Great work. One message away.</span>
+        </div>
+      </div>
 
-<section id="services"><div class="wrap">
-  <h2>What we do</h2><p class="sub">Tap a service to see the people who do it best.</p>
-  <div class="grid" id="svc"></div>
-</div></section>
+      <div class="hero-art" aria-label="Interactive creative services collage">
+        <div class="art-glow"></div>
+        <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
+        <div class="hero-image image-main tilt-card" onclick="heroGo()">
+          <img id="hero-img" src="https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&fit=crop&w=1100&q=85" alt="Colourful graphic design workspace">
+          <div class="image-label"><span id="hero-tag">01 / CREATIVE</span><b id="hero-title">Ideas into identity.</b></div>
+        </div>
+        <div class="float-card card-video tilt-card">
+          <div class="mini-thumb"><img src="https://images.unsplash.com/photo-1492619375914-88005aa9e8fb?auto=format&fit=crop&w=500&q=80" alt="Video production camera"></div>
+          <div><small>VIDEO STUDIO</small><b>Make it move <span>▶</span></b></div>
+        </div>
+        <div class="float-card card-data tilt-card">
+          <div class="data-icon">↗</div><small>DATA INSIGHTS</small><b>Clarity in every number.</b>
+          <div class="bars"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        </div>
+        <div class="float-card card-web tilt-card"><span class="web-dot"></span><small>WEB DEVELOPMENT</small><b>Built to work beautifully.</b><div class="web-lines"><i></i><i></i><i></i></div></div>
+        <div class="art-sticker">MAKE<br>IT <span>HAPPEN.</span></div>
+        <div class="art-caption">YOUR NEXT BIG THING<br><b>STARTS RIGHT HERE ↘</b></div>
+      </div>
+      <div class="hero-bottom"><span>SCROLL TO EXPLORE</span><span class="scroll-line"></span><span>01 — 04</span></div>
+    </section>
+    <div class="ticker" aria-hidden="true"><div id="tick"></div></div>
 
-<section id="experts" style="padding-top:0"><div class="wrap">
-  <h2>Meet the experts</h2><p class="sub">Contact anyone directly. No forms, no waiting.</p>
-  <input class="search" id="q" type="search" placeholder="Search by name or skill" oninput="setQ(this.value)" aria-label="Search experts">
-  <div class="chips" id="chips"></div>
-  <div class="grid" id="exp"></div>
-</div></section>
+    <section class="metrics section-wrap">
+      <div><strong id="n1">0</strong><span>Experts online <small>READY TO CONNECT</small></span></div>
+      <div><strong id="n2">0</strong><span>Creative services <small>ALL IN ONE PLACE</small></span></div>
+      <div><strong>1<span class="lime"> tap</span></strong><span>To reach them <small>NO LONG WAITING</small></span></div>
+      <p>Small team. Big possibilities.</p>
+    </section>
 
-<section class="how" id="how"><div class="wrap">
-  <h2>How it works</h2>
-  <div class="grid" style="margin-top:20px">
-    <div class="card"><h3>1. Choose a service</h3><p>Browse the services or search for a skill.</p></div>
-    <div class="card"><h3>2. Pick an expert</h3><p>Every profile shows what they do and how to reach them.</p></div>
-    <div class="card"><h3>3. Say hello</h3><p>Message on WhatsApp, call, or send an email, straight from their card.</p></div>
-  </div>
-</div></section>
-</main>
+    <section class="services section-wrap" id="services">
+      <div class="section-heading">
+        <div><div class="eyebrow">WHAT WE BRING TO THE TABLE</div><h2>Good work needs<br><em>the right people.</em></h2></div>
+        <p>Tap a service to explore the craft, then connect with the expert who can bring your idea to life.</p>
+      </div>
+      <div class="service-grid" id="svc"></div>
+    </section>
 
-<footer><div class="wrap"><b class="logo" id="flg">CLEMANTECH CONSULT</b><span>Creative and tech experts, one click away.</span></div></footer>
+    <section class="experts section-wrap" id="experts">
+      <div class="section-heading">
+        <div><div class="eyebrow">REAL PEOPLE. DIRECT ACCESS.</div><h2>Meet your <em>people.</em></h2></div>
+        <p>Choose a skill, find the right person and start the conversation directly on WhatsApp.</p>
+      </div>
+      <div class="expert-toolbar">
+        <div class="search-wrap"><span>⌕</span><input id="expert-search" type="search" placeholder="Search by name or skill..." aria-label="Search experts" oninput="setQ(this.value)"></div>
+        <span class="online-status"><i></i> <span id="online">0 experts online</span></span>
+      </div>
+      <div class="chips" id="chips"></div>
+      <div class="expert-grid" id="expert-grid"></div>
+      <p class="expert-note">Need a different specialist? <a href="#" onclick="contactUs();return false">Tell us what you need ↗</a></p>
+    </section>
 
-<nav class="bn" aria-label="Quick navigation">
-  <a href="#top"><span>🏠</span>Home</a><a href="#services"><span>✨</span>Services</a><a href="#experts"><span>👥</span>Experts</a>
-  <button onclick="acct()"><span>👤</span>Account</button>
-</nav>
-<div id="ov" onclick="if(event.target===this)closeM()"><div class="box" id="box" role="dialog" aria-modal="true"></div></div>
-<div id="toast" role="status"></div>
+    <section class="how section-wrap" id="how">
+      <div class="how-intro"><div class="eyebrow">SIMPLE BY DESIGN</div><h2>From idea<br>to <em>let's go.</em></h2><p>No complicated process. Just the right connection to get things moving.</p></div>
+      <div class="steps">
+        <div class="step"><span>01</span><div><h3>Choose a service</h3><p>Browse our services or search for the skill you need.</p></div><b>↗</b></div>
+        <div class="step"><span>02</span><div><h3>Pick an expert</h3><p>Find the person whose skills fit your project.</p></div><b>↗</b></div>
+        <div class="step"><span>03</span><div><h3>Say hello</h3><p>Start a direct WhatsApp conversation. That's it.</p></div><b>↗</b></div>
+      </div>
+    </section>
 
-<script type="module">
-import{initializeApp,deleteApp}from"https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
-import{getAuth,onAuthStateChanged,signInWithEmailAndPassword,createUserWithEmailAndPassword,signOut,sendPasswordResetEmail}from"https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
-import{getFirestore,collection,doc,onSnapshot,setDoc,updateDoc,deleteDoc,getDoc,serverTimestamp}from"https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
-const FB={apiKey:"AIzaSyD2mYFtPnRS5U3Eh0wQpw3FGRKIh56axlg",authDomain:"clemantech.firebaseapp.com",projectId:"clemantech",storageBucket:"clemantech.firebasestorage.app",messagingSenderId:"42083771386",appId:"1:42083771386:web:597881c3dbd88d242efa43"};
-const app=initializeApp(FB),au=getAuth(app),db=getFirestore(app);
-const CFG={CC:'233'}; // default country code for numbers starting with 0
-const DEF=[['🎨','Graphic Design','Logos, branding, flyers and social visuals','--pink'],['🎬','Video Editing','Reels, ads, events and documentaries','--sun'],['✍️','Content Creation','Captions, blogs, photos and brand stories','--mint'],['💻','Website Development','Fast, good-looking sites and web apps','--blue'],['📊','Data Analysis','Dashboards, reports and clear insights','--sun'],['🧭','Project Management','Plans, teams and deadlines that hold','--mint'],['🎉','Event Planning & Resin Art','Memorable events and handmade resin pieces','--pink']];
-let S=[]; // live list of expertise areas, loaded from Firestore (config/skills), falls back to DEF
-const $=s=>document.querySelector(s);
-const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-let U=[],me=null,F='All',Q='',LOGO='',SHOWN=true,JOIN=true,dirty=1,hi=0,hStop=0,hHold=0;
-const RM=matchMedia('(prefers-reduced-motion:reduce)').matches;
-function count(el,v){const from=+el.textContent||0;if(from===v||RM){el.textContent=v;return}const t0=performance.now();(function f(t){const k=Math.min(1,(t-t0)/700);el.textContent=Math.round(from+(v-from)*k);if(k<1)requestAnimationFrame(f)})(t0)}
-const cur=()=>U.find(u=>u.id===me);
-const wa=n=>{n=String(n).replace(/\D/g,'');return n.startsWith('0')?CFG.CC+n.slice(1):n};
-const tel=n=>String(n).replace(/[^\d+]/g,'');
-const hue=s=>{let h=0;for(const c of s)h=(h*31+c.charCodeAt(0))%360;return h};
-function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('on');clearTimeout(toast.t);toast.t=setTimeout(()=>t.classList.remove('on'),3400)}
-function modal(h){$('#box').innerHTML='<button class="b s x" onclick="closeM()" aria-label="Close">✕</button>'+h;$('#ov').classList.add('on');$('#box').scrollTop=0}
-function closeM(){$('#ov').classList.remove('on')}
-document.addEventListener('keydown',e=>e.key==='Escape'&&closeM());
+    <section class="join section-wrap" id="join">
+      <div class="join-panel">
+        <div class="join-orb"></div>
+        <div class="eyebrow">GOOD PEOPLE MAKE GREAT WORK</div>
+        <h2>Have a skill?<br><em>Bring it here.</em></h2>
+        <p>We're building a network of talented people who care about what they create. Let's make good things happen together.</p>
+        <a class="btn btn-dark" href="#" data-join onclick="joinNow();return false">Join the Clemantech team <span>↗</span></a>
+        <span class="join-foot">CREATIVITY HAS NO ONE-LANE ROAD.</span>
+      </div>
+    </section>
+  </main>
 
-/* ===== Drawing the page ===== */
-function draw(){
-  const a=cur();
-  $('#auth').innerHTML=a?`<button class="b s p" onclick="openDash()">${a.role==='admin'?'Admin panel':'My account'}</button> <button class="b s" onclick="logout()">Log out</button>`:`<button class="b s" onclick="openLogin()">Log in</button>${JOIN?` <button class="b s p" onclick="openForm('reg')">Join</button>`:''}`;
-  $('#tick').innerHTML=[...S,...S].map(s=>`<span>${s[0]} ${s[1]}</span>`).join('');
-  $('#svc').innerHTML=S.length?S.map((s,i)=>`<button class="card svc" style="background:var(${esc(s[3])});color:${s[3]==='--blue'?'#fff':'inherit'}" onclick="pickI(${i})"><div class="ic">${esc(s[0])}</div><h3>${esc(s[1])}</h3><small>${esc(s[2])}</small></button>`).join(''):'<div class="empty"><h3>Services coming soon</h3></div>';
-  $('#chips').innerHTML=['All',...S.map(s=>s[1])].map((n,i)=>`<button class="chip ${n===F?'on':''}" onclick="pickI(${i-1},1)">${esc(n)}</button>`).join('');
-  const all=U.filter(u=>u.active!==false&&vsk(u).length);
-  count($('#n1'),all.length);count($('#n2'),S.length);
-  if(dirty){dirty=0;const t=!LOGO||SHOWN;$('#lg').innerHTML=(LOGO?`<img class="lg" src="${LOGO}" alt="${t?'':'CLEMANTECH'}">`:'<i></i>')+(t?'CLEMANTECH':'');$('#flg').innerHTML=(LOGO?`<img class="lg" src="${LOGO}" alt="${t?'':'CLEMANTECH CONSULT'}">`:'')+(t?'CLEMANTECH CONSULT':'');$('#fav').href=LOGO||'data:,'}
-  $('#hjoin').style.display=JOIN?'':'none';
-  drawHero();
-  const q=Q.toLowerCase(),L=all.filter(u=>(F==='All'||u.skills.includes(F))&&(!q||(u.name+vsk(u).join(' ')+(u.bio||'')).toLowerCase().includes(q)));
-  $('#exp').innerHTML=L.length?L.map(u=>`<article class="card ex"><div class="av" style="--h:${hue(u.name)}">${esc(u.name[0].toUpperCase())}</div><h3>${esc(u.name)}</h3><div class="tags">${vsk(u).map(s=>`<span>${esc(s)}</span>`).join('')}</div><p>${esc(u.bio||'')}</p><div class="acts"><a class="b s wa" href="https://wa.me/${wa(u.whatsapp)}" target="_blank" rel="noopener">WhatsApp</a><a class="b s" href="tel:${tel(u.phone)}">Call</a><a class="b s" href="mailto:${esc(u.email)}">Email</a></div></article>`).join(''):`<div class="empty"><h3>${all.length?'No one matches that yet':'Our experts are joining soon'}</h3><p class="m" style="margin:8px 0 14px">${all.length?'Try another service or clear the search.':JOIN?'Be the first to list your skills.':'Check back soon.'}</p>${all.length||JOIN?`<button class="b p" onclick="${all.length?"pick('All',1);setQ('');document.getElementById('q').value=''":"openForm('reg')"}">${all.length?'Show everyone':'Join as an expert'}</button>`:''}</div>`;
-}
-/* ===== Interactive hero ===== */
-function drawHero(){
-  if(hi>=S.length)hi=0;
-  $('#hpills').innerHTML=S.map((x,i)=>`<button class="pill ${i===hi?'on':''}" data-i="${i}">${esc(x[0])} ${esc(x[1])}</button>`).join('');
-  hPanel()}
-function hPanel(){
-  const s=S[hi];if(!s){$('#hpan').innerHTML='';return}
-  const ex=U.filter(u=>u.active!==false&&vsk(u).includes(s[1])),n=ex.length;
-  $('#hpan').innerHTML=`<div class="pan" style="background:var(${esc(s[3])});color:${s[3]==='--blue'?'#fff':'var(--ink)'}"><div class="ic">${esc(s[0])}</div><h3>${esc(s[1])}</h3><p>${esc(s[2])}</p>${n?`<div class="hav">${ex.slice(0,4).map(u=>`<span style="--h:${hue(u.name)}">${esc(u.name[0].toUpperCase())}</span>`).join('')}${n>4?`<span class="more">+${n-4}</span>`:''}</div>`:''}${n||JOIN?`<button class="b p" onclick="${n?`pickI(${hi})`:"openForm('reg')"}">${n?`See ${n} expert${n>1?'s':''} →`:'Be the first to join →'}</button>`:''}</div>`}
-function hSel(i){hi=i;document.querySelectorAll('#hpills .pill').forEach(b=>b.classList.toggle('on',+b.dataset.i===i));hPanel()}
-$('#hpills').addEventListener('click',e=>{const b=e.target.closest('.pill');if(b){hStop=1;hSel(+b.dataset.i)}});
-$('#hpills').addEventListener('pointerover',e=>{const b=e.target.closest('.pill');if(b&&e.pointerType==='mouse'&&+b.dataset.i!==hi){hStop=1;hSel(+b.dataset.i)}});
-$('#hp').addEventListener('pointerenter',()=>hHold=1);$('#hp').addEventListener('pointerleave',()=>hHold=0);
-if(!RM){
-  setInterval(()=>{if(!hStop&&!hHold&&!document.hidden&&S.length>1)hSel((hi+1)%S.length)},3800);
-  const hero=$('#hero');
-  hero.addEventListener('pointermove',e=>{const r=hero.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;hero.querySelectorAll('.swatch').forEach(w=>{const d=+w.dataset.d;w.style.translate=`${x*d}px ${y*d}px`})});
-  hero.addEventListener('pointerleave',()=>hero.querySelectorAll('.swatch').forEach(w=>w.style.translate='0 0'));
-}
-function pick(n,stay){F=n;draw();if(!stay)document.getElementById('experts').scrollIntoView()}
-function pickI(i,stay){pick(i<0?'All':S[i][1],stay)}
+  <footer class="footer section-wrap">
+    <a class="brand" id="flg" href="#home"></a>
+    <p>Creative and tech experts,<br>one click away.</p>
+    <div class="footer-links"><a href="#services">Services</a><a href="#experts">Experts</a><a href="#join">Join our team</a></div>
+    <span class="copyright">© <span id="year"></span> CLEMANTECH CONSULT</span>
+  </footer>
 
-/* ===== Live data & auth ===== */
-let busy=0,ready=0;
-const er=x=>({'auth/email-already-in-use':'That email is already registered','auth/invalid-credential':'Wrong email or password','auth/weak-password':'Password needs 6+ characters','auth/invalid-email':'That email looks wrong','auth/too-many-requests':'Too many tries. Please wait a moment','permission-denied':'You do not have permission to do that'}[x.code]||'Something went wrong ('+(x.code||x.message)+')');
-onSnapshot(collection(db,'users'),s=>{U=s.docs.map(d=>({...d.data(),id:d.id,skills:d.data().skills||[]}));ready=1;draw()},x=>toast('Could not load experts: '+(x.code||x.message)));
-function vsk(u){return u.skills.filter(k=>S.some(s=>s[1]===k))}
-onSnapshot(doc(db,'config','settings'),s=>{JOIN=!(s.exists()&&s.data().joinOpen===false);draw()},()=>{});
-onSnapshot(doc(db,'config','brand'),s=>{const d=s.exists()?s.data():{};LOGO=d.logo||'';SHOWN=d.showName!==false;dirty=1;draw()},()=>{});
-onSnapshot(doc(db,'config','skills'),s=>{const l=s.exists()&&s.data().list;S=Array.isArray(l)?l.map(x=>[x.i,x.n,x.d,x.c]):DEF;if(F!=='All'&&!S.some(x=>x[1]===F))F='All';draw()},()=>{S=DEF;draw()});
-onAuthStateChanged(au,async u=>{me=u?u.uid:null;if(u&&!busy){const d=await getDoc(doc(db,'users',u.uid)).catch(()=>null);if(d&&!d.exists()){await signOut(au);me=null;toast('This account was removed. Please contact the admin.')}}draw()});
-function acct(){me?openDash():openLogin()}
-function setQ(v){Q=v;draw()}
-function openLogin(){modal(`<h2>Welcome back</h2><form onsubmit="return login(event)"><label>Email<input name="email" type="email" required autocomplete="username"></label><label>Password<input name="pw" type="password" required autocomplete="current-password"></label><button class="b p">Log in</button></form><p class="m" style="margin-top:14px"><a href="#" onclick="forgot();return false">Forgot your password?</a>${JOIN?` &nbsp;|&nbsp; <a href="#" onclick="openForm('reg');return false">Create an account</a>`:''}</p>`)}
-async function login(e){e.preventDefault();const f=new FormData(e.target);try{await signInWithEmailAndPassword(au,f.get('email').trim(),f.get('pw'));closeM();toast('Welcome back!')}catch(x){toast(er(x))}return false}
-function logout(){signOut(au);toast('Logged out')}
-function forgot(){const ad=U.find(u=>u.role==='admin'&&u.whatsapp);modal(`<h2>Reset your password</h2><p style="margin:12px 0">Enter your email and we will send you a reset link.</p><form onsubmit="return sendReset(event)"><label>Email<input name="email" type="email" required></label><button class="b p">Send reset link</button></form>${ad?`<p class="m" style="margin-top:14px">No access to that email? <a href="https://wa.me/${wa(ad.whatsapp)}" target="_blank" rel="noopener">Message the admin</a></p>`:''}`)}
-async function sendReset(e){e.preventDefault();try{await sendPasswordResetEmail(au,new FormData(e.target).get('email').trim())}catch(x){if(x.code!=='auth/user-not-found')return toast(er(x)),false}toast('If that email is registered, a reset link is on its way');closeM();return false}
-
-/* ===== Forms: register / add / edit / my profile ===== */
-function openForm(mode,id){
-  if(mode==='reg'&&!JOIN)return toast('New sign-ups are closed right now. Please check back later.');
-  const u=(id?U.find(x=>x.id===id):mode==='me'?cur():null)||{skills:[]},a=cur()?.role==='admin';
-  const T={reg:'Join as an expert',add:'Add an account',edit:'Edit account',me:'My profile'}[mode];
-  modal(`<h2>${T}</h2><form onsubmit="return save(event,'${mode}','${u.id||''}')">
-  <label>Full name<input name="name" required value="${esc(u.name)}"></label>
-  <div class="row"><label>Active email<input name="email" type="email" required value="${esc(u.email)}" ${u.id?'readonly':''}></label>
-  <label>WhatsApp number<input name="wa" type="tel" placeholder="e.g. 0244123456" value="${esc(u.whatsapp)}"></label></div>
-  <label>Active call line<input name="ph" type="tel" placeholder="e.g. 0201234567" value="${esc(u.phone)}"></label>
-  <div><b style="font-size:.9rem">My expertise (pick all that apply)</b><div class="sk" style="margin-top:6px">${S.map(s=>`<label class="chip"><input type="checkbox" name="sk" value="${s[1]}" ${u.skills.includes(s[1])?'checked':''}>${s[0]} ${s[1]}</label>`).join('')}</div></div>
-  <label>Short bio<textarea name="bio" rows="2" maxlength="160" placeholder="One line about your work">${esc(u.bio)}</textarea></label>
-  ${mode==='reg'||mode==='add'?`<label>${mode==='add'?'Starting password (they can reset it later)':'Password'}<input name="pw" type="password" minlength="6" required autocomplete="new-password"></label>`:''}
-  ${a&&(mode==='add'||(mode==='edit'&&u.id!==me))?`<label>Role<select name="role"><option value="expert" ${u.role!=='admin'?'selected':''}>Expert</option><option value="admin" ${u.role==='admin'?'selected':''}>Admin</option></select></label>`:''}
-  ${mode==='me'||mode==='edit'?`<label class="chip" style="justify-self:start"><input type="checkbox" name="act" ${u.active!==false?'checked':''}>Show on the website</label>`:''}
-  <button class="b p">${mode==='reg'?'Create my account':'Save'}</button></form>`)}
-async function save(e,mode,id){e.preventDefault();const f=new FormData(e.target),g=k=>(f.get(k)||'').trim(),sk=f.getAll('sk'),email=g('email').toLowerCase(),pw=f.get('pw')||'';
-  if(sk.length&&(!g('wa')||!g('ph')))return toast('Experts need a WhatsApp number and a call line'),false;
-  const d={name:g('name'),email,whatsapp:g('wa'),phone:g('ph'),bio:g('bio'),skills:sk};busy=1;
-  try{
-    if(mode==='reg'){const c=await createUserWithEmailAndPassword(au,email,pw);await setDoc(doc(db,'users',c.user.uid),{...d,role:'expert',active:true,createdAt:serverTimestamp()});toast('Welcome aboard, '+d.name.split(' ')[0]+'!');closeM()}
-    else if(mode==='add'){const a2=initializeApp(FB,'t'+Date.now()),a2a=getAuth(a2),c=await createUserWithEmailAndPassword(a2a,email,pw);await signOut(a2a);await deleteApp(a2);await setDoc(doc(db,'users',c.user.uid),{...d,role:f.get('role')||'expert',active:true,createdAt:serverTimestamp()});toast('Account added');openDash()}
-    else{const up={...d};delete up.email;up.active=!!f.get('act');if(f.get('role')&&id!==me)up.role=f.get('role');await updateDoc(doc(db,'users',id),up);toast('Saved');mode==='edit'?openDash():closeM()}
-  }catch(x){toast(er(x))}
-  busy=0;return false}
-
-/* ===== Dashboard & admin tools ===== */
-function openDash(){const a=cur();if(!a)return openLogin();
-  let h=`<h2>Hi, ${esc(a.name.split(' ')[0])} 👋</h2><div class="acts" style="margin-top:14px"><button class="b p" onclick="openForm('me')">Edit my profile & expertise</button><button class="b" onclick="resetPw('${a.id}')">Change password</button></div>`;
-  if(a.role==='admin')h+=joinAdmin();
-  if(a.role==='admin')h+=logoAdmin();
-  if(a.role==='admin')h+=skillAdmin();
-  if(a.role==='admin')h+=`<h2 style="font-size:1.4rem;margin-top:26px">Team (${U.length})</h2><div class="acts" style="margin-top:10px"><button class="b s p" onclick="openForm('add')">+ Add account</button></div>`+U.map(u=>`<div class="u"><div><b>${esc(u.name)}</b> ${u.role==='admin'?'🛡️':''}${u.active===false?' (hidden)':''}<small>${esc(u.email)}</small><small>${esc(u.skills.join(', ')||'No expertise yet')}</small></div><div class="acts"><button class="b s" onclick="openForm('edit','${u.id}')">Edit</button><button class="b s" onclick="resetPw('${u.id}')">Send reset email</button>${u.id!==me?`<button class="b s d" onclick="del('${u.id}')">Remove</button>`:''}</div></div>`).join('');
-  modal(h)}
-function joinAdmin(){
-  return `<h2 style="font-size:1.4rem;margin-top:26px">Expert sign-ups</h2><div class="u"><div><b>${JOIN?'Open':'Closed'}</b><small>${JOIN?'Anyone can join as an expert from the website.':'The Join buttons are hidden and new sign-ups are blocked.'}</small></div><div class="acts"><button class="b s ${JOIN?'d':'p'}" onclick="setJoin(${!JOIN})">${JOIN?'Turn off sign-ups':'Turn on sign-ups'}</button></div></div>`}
-async function setJoin(v){try{await setDoc(doc(db,'config','settings'),{joinOpen:!!v,updatedAt:serverTimestamp()},{merge:true});toast(v?'Sign-ups are open':'Sign-ups are closed');openDash()}catch(x){toast(er(x))}}
-function logoAdmin(){
-  return `<h2 style="font-size:1.4rem;margin-top:26px">Site logo</h2><p class="m" style="margin-top:4px">Shown in the top bar, footer and browser tab. A PNG with a transparent background looks best.</p><div class="u"><div>${LOGO?`<img class="lg" src="${LOGO}" alt="Current logo" style="height:56px;max-width:180px;object-fit:contain">`:'<small>No logo yet. The default mark is showing.</small>'}</div><div class="acts"><label class="b s p" style="cursor:pointer">${LOGO?'Replace logo':'Upload logo'}<input type="file" accept="image/*" hidden onchange="upLogo(this)"></label>${LOGO?'<button class="b s d" onclick="rmLogo()">Remove</button>':''}</div></div>${LOGO?`<label class="chip" style="margin-top:10px"><input type="checkbox" ${SHOWN?'checked':''} onchange="setShowName(this.checked)">Show the name next to the logo</label>`:''}`}
-function shrink(f){return new Promise((ok,no)=>{const u=URL.createObjectURL(f),im=new Image();
-  im.onload=()=>{URL.revokeObjectURL(u);const W=im.naturalWidth||400,H=im.naturalHeight||400;for(const m of[480,320,200]){const k=Math.min(1,m/Math.max(W,H)),c=document.createElement('canvas');c.width=Math.max(1,Math.round(W*k));c.height=Math.max(1,Math.round(H*k));c.getContext('2d').drawImage(im,0,0,c.width,c.height);const d=c.toDataURL('image/png');if(d.length<700000)return ok(d)}no(new Error('big'))};
-  im.onerror=()=>no(new Error('bad'));im.src=u})}
-async function upLogo(inp){const f=inp.files[0];inp.value='';if(!f)return;if(!f.type.startsWith('image/'))return toast('Please choose an image file');
-  try{const url=await shrink(f);await setDoc(doc(db,'config','brand'),{logo:url,showName:SHOWN,updatedAt:serverTimestamp()},{merge:true});toast('Logo updated');openDash()}catch(x){toast(x.code?er(x):'Could not use that image. Try a smaller PNG or JPG')}}
-async function rmLogo(){if(!confirm('Remove the logo and go back to the default mark?'))return;try{await setDoc(doc(db,'config','brand'),{logo:'',updatedAt:serverTimestamp()},{merge:true});toast('Logo removed');openDash()}catch(x){toast(er(x))}}
-async function setShowName(v){try{await setDoc(doc(db,'config','brand'),{showName:!!v,updatedAt:serverTimestamp()},{merge:true})}catch(x){toast(er(x))}}
-function skillAdmin(){
-  const opt=[['--pink','Pink'],['--sun','Yellow'],['--mint','Mint'],['--blue','Blue']].map(o=>`<option value="${o[0]}">${o[1]}</option>`).join('');
-  return `<h2 style="font-size:1.4rem;margin-top:26px">Areas of expertise (${S.length})</h2><p class="m" style="margin-top:4px">These appear as services on the site and as choices when experts set up their profile.</p>`
-  +S.map((s,k)=>{const c=U.filter(u=>u.active!==false&&u.skills.includes(s[1])).length;return `<div class="u"><div><b>${esc(s[0])} ${esc(s[1])}</b><small>${c} expert${c===1?'':'s'}</small></div><div class="acts"><button class="b s d" onclick="delSkill(${k})">Remove</button></div></div>`}).join('')
-  +`<form class="u" style="display:grid" onsubmit="return addSkill(event)"><b>Add an area of expertise</b><div class="row"><label>Emoji<input name="i" maxlength="4" placeholder="✨"></label><label>Name<input name="n" required maxlength="40" placeholder="e.g. Photography"></label></div><label>Short description<input name="d" maxlength="80" placeholder="What this covers"></label><label>Card colour<select name="c">${opt}</select></label><button class="b p">+ Add area</button></form>`}
-async function saveSkills(l){await setDoc(doc(db,'config','skills'),{list:l.map(x=>({i:x[0],n:x[1],d:x[2],c:x[3]})),updatedAt:serverTimestamp()})}
-async function addSkill(e){e.preventDefault();const f=new FormData(e.target),n=(f.get('n')||'').trim(),i=(f.get('i')||'').trim()||'✨',d=(f.get('d')||'').trim()||'Ask our experts for details';
-  if(!n)return false;if(S.some(s=>s[1].toLowerCase()===n.toLowerCase()))return toast('That area already exists'),false;
-  try{await saveSkills([...S,[i,n,d,f.get('c')]]);toast('Added '+n);openDash()}catch(x){toast(er(x))}return false}
-async function delSkill(k){const s=S[k];if(!s)return;const c=U.filter(u=>u.skills.includes(s[1])).length;
-  if(!confirm('Remove "'+s[1]+'"?'+(c?' '+c+' expert'+(c>1?'s':'')+' currently list it. It will disappear from the site and their profiles.':'')))return;
-  try{await saveSkills(S.filter((_,j)=>j!==k));toast('Removed '+s[1]);openDash()}catch(x){toast(er(x))}}
-async function resetPw(id){const u=U.find(x=>x.id===id);try{await sendPasswordResetEmail(au,u.email);toast('Reset link sent to '+u.email)}catch(x){toast(er(x))}}
-async function del(id){const u=U.find(x=>x.id===id);if(u.role==='admin'&&U.filter(x=>x.role==='admin').length<2)return toast('You need at least one admin');
-  if(!confirm('Remove '+u.name+' from the site? This cannot be undone.'))return;try{await deleteDoc(doc(db,'users',id));toast('Account removed');openDash()}catch(x){toast(er(x))}}
-Object.assign(window,{acct,setQ,openLogin,login,logout,forgot,sendReset,openForm,save,openDash,resetPw,del,pick,pickI,setJoin,addSkill,delSkill,upLogo,rmLogo,setShowName,closeM,draw});
-draw();
-</script>
+  <a class="floating-contact" href="#" onclick="contactUs();return false" aria-label="Contact Clemantech on WhatsApp"><span>☏</span><b>Let's talk</b></a>
+  <div id="ov" onclick="if(event.target===this)closeM()"><div class="box" id="box" role="dialog" aria-modal="true"></div></div>
+  <div id="toast" role="status"></div>
+  <script type="module" src="script.js"></script>
 </body>
 </html>
